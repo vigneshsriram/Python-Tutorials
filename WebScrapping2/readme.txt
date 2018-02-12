@@ -1,0 +1,1 @@
+Make a text file which stores each collected tweet as a line and pass this file to the function which will Plot the top words using matplotlib package
