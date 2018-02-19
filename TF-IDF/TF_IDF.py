@@ -28,24 +28,31 @@ def get_doc_tokens(doc):
     
     #condition to lemmatize
     if(lemmatized == True):
-        tokens=[token.strip()             for token in nltk.word_tokenize(doc.lower())             if token.strip() not in stop_words and               token.strip() not in string.punctuation]
+        tokens=[token.strip()             
+        for token in nltk.word_tokenize(doc.lower())             
+            if token.strip() not in stop_words and               
+            token.strip() not in string.punctuation]
         #tokens = lemma(doc)
         tagged_tokens= nltk.pos_tag(tokens)
         #print("********************TAgged Tokens***********************")
         #print(tagged_tokens)
-        le_words=[wordnet_lemmatizer.lemmatize(word, get_wordnet_pos(tag))           # tagged_tokens is a list of tuples (word, tag)
-          for (word, tag) in tagged_tokens \
-          # remove stop words
-          if word not in stop_words and \
-          # remove punctuations
-          word not in string.punctuation]
-          # get lemmatized unique tokens as vocabulary
+        le_words=[wordnet_lemmatizer.lemmatize(word, get_wordnet_pos(tag))           
+        # tagged_tokens is a list of tuples (word, tag)
+        for (word, tag) in tagged_tokens \
+        # remove stop words
+        if word not in stop_words and \
+        # remove punctuations
+        word not in string.punctuation]
+        # get lemmatized unique tokens as vocabulary
         le_vocabulary=set(le_words)
         tokens = list(le_vocabulary)
     
     else:
         #stop_words = stopwords.words('english')
-        tokens=[token.strip()             for token in nltk.word_tokenize(doc.lower())             if token.strip() not in stop_words and               token.strip() not in string.punctuation]
+        tokens=[token.strip()             
+                for token in nltk.word_tokenize(doc.lower())             
+                if token.strip() not in stop_words and               
+                token.strip() not in string.punctuation]
     # you can add bigrams, collocations, or lemmatization here
     #print("******************** Tokens***********************")
     return tokens
@@ -79,7 +86,8 @@ def tfidf(list1):
     # step 2. process all documents to get list of token list
     docs_tokens=[get_doc_tokens(doc) for doc in list1]
     #print(docs_tokens)
-    voc=list(set([token for tokens in docs_tokens               for token in tokens]))
+    voc=list(set([token for tokens in docs_tokens               
+                  for token in tokens]))
     dtm=np.zeros((len(list1), len(voc)))
     #print(voc)
    
